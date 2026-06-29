@@ -15,7 +15,7 @@ struct TodayView: View {
                 PixelPalette.background.ignoresSafeArea()
 
                 VStack(spacing: 22) {
-                    CatPlaceholder(isHappy: task?.isCompleted == true)
+                    CatArtImage(isHappy: task?.isCompleted == true)
                         .frame(height: 190)
 
                     VStack(spacing: 10) {

@@ -58,53 +58,23 @@ struct PixelRoomBackground: View {
     }
 }
 
-struct CatPlaceholder: View {
+struct RoomBaseImage: View {
+    var body: some View {
+        Image("room-base")
+            .resizable()
+            .scaledToFill()
+    }
+}
+
+struct CatArtImage: View {
     let isHappy: Bool
 
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(Color(red: 1.0, green: 0.88, blue: 0.70))
-                .frame(width: 138, height: 118)
-                .offset(y: 26)
-
-            Circle()
-                .fill(Color(red: 1.0, green: 0.92, blue: 0.78))
-                .frame(width: 150, height: 132)
-
-            Circle()
-                .fill(Color(red: 0.94, green: 0.55, blue: 0.14))
-                .frame(width: 58, height: 42)
-                .offset(x: -35, y: -38)
-
-            Triangle()
-                .fill(Color(red: 1.0, green: 0.92, blue: 0.78))
-                .frame(width: 42, height: 42)
-                .offset(x: -50, y: -72)
-
-            Triangle()
-                .fill(Color(red: 1.0, green: 0.92, blue: 0.78))
-                .frame(width: 42, height: 42)
-                .offset(x: 50, y: -72)
-
-            HStack(spacing: 38) {
-                Circle().fill(PixelPalette.ink).frame(width: 14, height: 14)
-                Circle().fill(PixelPalette.ink).frame(width: 14, height: 14)
-            }
-            .offset(y: -8)
-
-            Text(isHappy ? "ᴗ" : "ω")
-                .font(.system(size: 28, weight: .bold, design: .rounded))
-                .foregroundStyle(PixelPalette.ink)
-                .offset(y: 16)
-
-            HStack(spacing: 78) {
-                Circle().fill(Color.pink.opacity(0.45)).frame(width: 18, height: 12)
-                Circle().fill(Color.pink.opacity(0.45)).frame(width: 18, height: 12)
-            }
-            .offset(y: 18)
-        }
-        .frame(width: 190, height: 190)
+        Image(isHappy ? "cat-happy" : "cat-default")
+            .resizable()
+            .scaledToFit()
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(color: .black.opacity(0.16), radius: 8, y: 4)
     }
 }
 
@@ -126,16 +96,17 @@ struct FurnitureToken: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(item.color.opacity(0.9))
+                .fill(PixelPalette.panel)
                 .frame(width: size, height: size)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(PixelPalette.border, lineWidth: 2)
                 )
 
-            Image(systemName: item.systemImage)
-                .font(.system(size: size * 0.42, weight: .bold))
-                .foregroundStyle(.white)
+            Image(item.assetName)
+                .resizable()
+                .scaledToFit()
+                .padding(size * 0.08)
         }
     }
 }

@@ -42,14 +42,16 @@ final class FurnitureItem {
     var name: String
     var price: Int
     var systemImage: String
+    var assetName: String
     var paletteName: String
     var isUnlocked: Bool
 
-    init(id: String, name: String, price: Int, systemImage: String, paletteName: String, isUnlocked: Bool = false) {
+    init(id: String, name: String, price: Int, systemImage: String, assetName: String, paletteName: String, isUnlocked: Bool = false) {
         self.id = id
         self.name = name
         self.price = price
         self.systemImage = systemImage
+        self.assetName = assetName
         self.paletteName = paletteName
         self.isUnlocked = isUnlocked
     }
@@ -109,12 +111,12 @@ enum SeedData {
 
     static var furnitureSeeds: [FurnitureItem] {
         [
-            FurnitureItem(id: "lamp-green", name: "绿色台灯", price: 40, systemImage: "lamp.desk.fill", paletteName: "sage", isUnlocked: true),
-            FurnitureItem(id: "chair-green", name: "绿色单人椅", price: 80, systemImage: "chair.lounge.fill", paletteName: "sage"),
-            FurnitureItem(id: "bookcase", name: "小书柜", price: 90, systemImage: "books.vertical.fill", paletteName: "wood"),
-            FurnitureItem(id: "pillow-yellow", name: "黄色抱枕", price: 30, systemImage: "square.fill", paletteName: "honey", isUnlocked: true),
-            FurnitureItem(id: "plant", name: "小盆栽", price: 50, systemImage: "leaf.fill", paletteName: "sage"),
-            FurnitureItem(id: "wall-art", name: "墙面挂画", price: 60, systemImage: "photo.fill", paletteName: "rose")
+            FurnitureItem(id: "lamp-green", name: "绿色台灯", price: 40, systemImage: "lamp.desk.fill", assetName: "furniture-lamp-green", paletteName: "sage", isUnlocked: true),
+            FurnitureItem(id: "chair-green", name: "绿色单人椅", price: 80, systemImage: "chair.lounge.fill", assetName: "furniture-chair-green", paletteName: "sage"),
+            FurnitureItem(id: "bookcase", name: "小书柜", price: 90, systemImage: "books.vertical.fill", assetName: "furniture-bookcase", paletteName: "wood"),
+            FurnitureItem(id: "pillow-yellow", name: "黄色抱枕", price: 30, systemImage: "square.fill", assetName: "furniture-pillow-yellow", paletteName: "honey", isUnlocked: true),
+            FurnitureItem(id: "plant", name: "小盆栽", price: 50, systemImage: "leaf.fill", assetName: "furniture-plant", paletteName: "sage"),
+            FurnitureItem(id: "wall-art", name: "墙面挂画", price: 60, systemImage: "photo.fill", assetName: "furniture-wall-art", paletteName: "rose")
         ]
     }
 }

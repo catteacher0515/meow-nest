@@ -35,21 +35,43 @@ struct ResourceBar: View {
     var body: some View {
         HStack(spacing: 10) {
             ResourcePill(icon: "heart.fill", value: player?.hearts ?? 0, tint: .pink)
-            ResourcePill(icon: "fish.fill", value: player?.coins ?? 0, tint: .orange)
-            ResourcePill(icon: "star.fill", value: player?.stars ?? 0, tint: .yellow)
+            ResourcePill(assetName: "icon-coin", value: player?.coins ?? 0, tint: .orange)
+            ResourcePill(assetName: "icon-star", value: player?.stars ?? 0, tint: .yellow)
         }
     }
 }
 
 struct ResourcePill: View {
-    let icon: String
+    var icon: String?
+    var assetName: String?
     let value: Int
     let tint: Color
 
+    init(icon: String, value: Int, tint: Color) {
+        self.icon = icon
+        self.assetName = nil
+        self.value = value
+        self.tint = tint
+    }
+
+    init(assetName: String, value: Int, tint: Color) {
+        self.icon = nil
+        self.assetName = assetName
+        self.value = value
+        self.tint = tint
+    }
+
     var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: icon)
-                .foregroundStyle(tint)
+            if let assetName {
+                Image(assetName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 22, height: 22)
+            } else if let icon {
+                Image(systemName: icon)
+                    .foregroundStyle(tint)
+            }
             Text("\(value)")
                 .font(.headline.monospacedDigit())
                 .foregroundStyle(PixelPalette.ink)
@@ -71,21 +93,15 @@ struct RoomPreview: View {
 
     var body: some View {
         ZStack {
-            PixelRoomBackground()
+            RoomBaseImage()
 
             VStack {
                 Spacer()
 
-                HStack(alignment: .bottom, spacing: 16) {
-                    ForEach(furniture.filter { player?.selectedIDs.contains($0.id) == true }.prefix(2)) { item in
-                        FurnitureToken(item: item, size: 54)
-                    }
-                }
-
-                CatPlaceholder(isHappy: false)
-                    .padding(.top, 4)
+                CatArtImage(isHappy: false)
+                    .frame(width: 150, height: 150)
+                    .padding(.bottom, 92)
             }
-            .padding(.bottom, 22)
         }
         .frame(height: 420)
         .clipShape(RoundedRectangle(cornerRadius: 10))
